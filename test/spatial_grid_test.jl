@@ -19,6 +19,17 @@
         [@test length(r) == 3 for r in values(d3d)]
     end
 
+    @testset "Indexing" begin
+        point2d = zeros(2,1)
+        d2d = rasterize_points(point2d, 1.0)
+        pixel_inds = collect(keys(d2d))
+        @test pixel_inds == Tuple{UInt32,UInt32}[(1,1)]
+        point3d = zeros(3,1)
+        d3d = rasterize_points(point3d, 1.0)
+        pixel_inds = collect(keys(d3d))
+        @test pixel_inds == Tuple{UInt32,UInt32}[(1,1)]
+    end
+
     @testset "Voxelization" begin
         # Test standard uniformly sized voxels
         voxel_size = 1.0
